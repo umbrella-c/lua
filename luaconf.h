@@ -51,6 +51,9 @@
 #define LUA_USE_WINDOWS  /* enable goodies for regular Windows */
 #endif
 
+#if defined(MOLLENOS)
+#define LUA_USE_VALI
+#endif
 
 #if defined(LUA_USE_WINDOWS)
 #define LUA_DL_DLL	/* enable support for DLL */
@@ -67,6 +70,10 @@
 #if defined(LUA_USE_MACOSX)
 #define LUA_USE_POSIX
 #define LUA_USE_DLOPEN		/* MacOS does not need -ldl */
+#endif
+
+#if defined(LUA_USE_VALI)
+#define LUA_USE_DLOPEN		/* Vali does not need -ldl */
 #endif
 
 
