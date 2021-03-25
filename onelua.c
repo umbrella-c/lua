@@ -119,3 +119,10 @@
 #ifdef MAKE_LUAC
 #include "luac.c"
 #endif
+
+/* lua_dll */
+#if defined(LUA_BUILD_AS_DLL) && defined(LUA_USE_VALI)
+void dllmain(int action) {
+    (void)action;
+}
+#endif

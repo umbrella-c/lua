@@ -228,6 +228,23 @@
 		LUA_CDIR"loadall.dll;" ".\\?.dll"
 #endif
 
+#elif defined(LUA_USE_VALI)
+
+#define LUA_LDIR "$share/lua/" LUA_VDIR "/"
+#define LUA_CDIR "$lib/lua/" LUA_VDIR "/"
+
+#if !defined(LUA_PATH_DEFAULT)
+#define LUA_PATH_DEFAULT  \
+		LUA_LDIR"?.lua;"  LUA_LDIR"?/init.lua;" \
+		LUA_CDIR"?.lua;"  LUA_CDIR"?/init.lua;" \
+		"./?.lua;" "./?/init.lua"
+#endif
+
+#if !defined(LUA_CPATH_DEFAULT)
+#define LUA_CPATH_DEFAULT \
+		LUA_CDIR"?.dll;" LUA_CDIR"loadall.dll;" "./?.dll"
+#endif
+
 #else			/* }{ */
 
 #define LUA_ROOT	"/usr/local/"
