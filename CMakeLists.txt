@@ -21,5 +21,18 @@ if (MOLLENOS)
   target_link_libraries(lua)
 endif()
 
+add_library(liblua SHARED onelua.c)
+set_target_properties(liblua
+    PROPERTIES
+        COMPILE_FLAGS "-DLUA_BUILD_AS_DLL -DMAKE_LIB"
+)
+
+# Install library headers
+install(FILES luaconf.h lua.h lauxlib.h lualib.h DESTINATION include/lua)
+
 # Add a new install target
-install(TARGETS lua DESTINATION bin)
+install(TARGETS lua liblua
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+)
