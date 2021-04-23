@@ -36,3 +36,7 @@ install(TARGETS lua liblua
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
 )
+
+# install the generated map file
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bin/liblua.map DESTINATION bin)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bin/lua.map DESTINATION bin)
