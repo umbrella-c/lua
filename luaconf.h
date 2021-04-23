@@ -235,9 +235,9 @@
 
 #if !defined(LUA_PATH_DEFAULT)
 #define LUA_PATH_DEFAULT  \
+		"./?.lua;" "./?/init.lua;" \
 		LUA_LDIR"?.lua;"  LUA_LDIR"?/init.lua;" \
-		LUA_CDIR"?.lua;"  LUA_CDIR"?/init.lua;" \
-		"./?.lua;" "./?/init.lua"
+		LUA_CDIR"?.lua;"  LUA_CDIR"?/init.lua"
 #endif
 
 #if !defined(LUA_CPATH_DEFAULT)
