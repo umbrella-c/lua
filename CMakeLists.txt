@@ -7,15 +7,19 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 # Configure primary executable target
 add_executable(lua onelua.c)
-if (MOLLENOS)
-  target_link_libraries(lua)
-endif()
-
 add_library(liblua SHARED onelua.c)
 set_target_properties(liblua
     PROPERTIES
         COMPILE_FLAGS "-DLUA_BUILD_AS_DLL -DMAKE_LIB"
 )
+
+# Enable generation of .map files
+if (MOLLENOS)
+  set_target_properties(lua liblua
+    PROPERTIES
+        LINK_FLAGS "-Xlinker -lldmap"
+  )
+endif()
 
 # Install library headers
 install(FILES luaconf.h lua.h lauxlib.h lualib.h DESTINATION include/lua)
@@ -28,5 +32,7 @@ install(TARGETS lua liblua
 )
 
 # install the generated map file
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bin/liblua.map DESTINATION bin)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bin/lua.map DESTINATION bin)
+if (MOLLENOS)
+  install(FILES ${CMAKE_BINARY_DIR}/bin/liblua.map DESTINATION bin)
+  install(FILES ${CMAKE_BINARY_DIR}/bin/lua.map DESTINATION bin)
+endif()
