@@ -13,14 +13,6 @@ set_target_properties(liblua
         COMPILE_FLAGS "-DLUA_BUILD_AS_DLL -DMAKE_LIB"
 )
 
-# Enable generation of .map files
-if (MOLLENOS)
-  set_target_properties(lua liblua
-    PROPERTIES
-        LINK_FLAGS "-Xlinker -lldmap"
-  )
-endif()
-
 # Install library headers
 install(FILES luaconf.h lua.h lauxlib.h lualib.h DESTINATION include/lua)
 
@@ -30,9 +22,3 @@ install(TARGETS lua liblua
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
 )
-
-# install the generated map file
-if (MOLLENOS)
-  install(FILES ${CMAKE_BINARY_DIR}/bin/liblua.map DESTINATION bin)
-  install(FILES ${CMAKE_BINARY_DIR}/bin/lua.map DESTINATION bin)
-endif()
